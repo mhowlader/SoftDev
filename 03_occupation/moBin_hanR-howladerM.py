@@ -1,11 +1,12 @@
 #Team moBin -- Robin Han & Mohtasim Howlader
 #SoftDev1 pd08
 #K06 -- Stl/O: Divine your Destiny!
-#2018-09-13 
+#2018-09-13
 
 import csv
 import random
 
+#returns random occupation based on percent of likelihood
 def chooseOccupation(d,totalSum):
         #variable to match occupation with its respective weight
         i = 0
@@ -24,16 +25,16 @@ def chooseOccupation(d,totalSum):
                         break
                 i+=1
                 #print(i)
-                
-                
+
+
         #print (i)
         #print (len(list(weights)))
         return list(occ)[i]
-        
+
 def main():
         # initialize dictionary
-        
-        d = {}
+
+        d = {} #the final dictionary
         with open('occupations.csv') as csvfile:
                 reader = csv.DictReader(csvfile)
                 # eliminates first row of csv file
@@ -46,7 +47,9 @@ def main():
                                d[row['Job Class']] = float(row['Percentage'])
                         else:
                                 totalSum = float(row['Percentage'])
-        #print(chooseOccupation(d))
+        print(chooseOccupation(d,totalSum))
+
+        #testing
         margin = 15
         testDict = {}
         total = 100000
@@ -58,7 +61,7 @@ def main():
                 else:
                         testDict[occ] +=1
         #print (testDict)
-        wrongAns = False                
+        wrongAns = False
         for occupation in testDict.keys():
                 #print (d.get(occupation))
                 #print (d.get(occupation) + margin)
@@ -72,6 +75,6 @@ def main():
                         break;
         if not (wrongAns):
                 print ("PASSED!")
-                        
-                
+
+
 main()
