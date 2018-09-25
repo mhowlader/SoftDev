@@ -14,7 +14,8 @@ def chooseOccupation(d,totalSum):
         weights = d.values()
         # generating a random number float from 0 to the total sum of the weights
         #print (totalSum)
-        randWeight = float(random.randrange(0,totalSum*100))/100
+        #randWeight = float(random.randrange(0,totalSum*100))/100
+        randWeight = random.uniform(0,totalSum) 
         #print (randWeight)
         i = -1
         for weight in weights:
