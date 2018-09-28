@@ -1,11 +1,16 @@
+# Mohtasim Howlader
+# SoftDev1 pd8
+# K13 -- Echo Echo Echo
+# 2018-09-27
+
 from flask import Flask, render_template, request
 
 app=Flask(__name__)
 
 @app.route('/')
 def home():
-    #request.headers()
-    return render_template('echo.html')
+    return render_template('echo.html')  #inputs are in this this file, which will be sent to auth
+
 
 @app.route('/auth')
 def authorize():
