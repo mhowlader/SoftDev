@@ -1,4 +1,4 @@
-# Team Perry (Sarar Aseer and Mohtasim Howlader)
+# Team Perry (Mohtasim Howlader and Sarar Aseer)
 # SoftDev1 pd8
 # K14 -- Do I Know You?
 # 2018-10-02
@@ -6,7 +6,7 @@
 from flask import Flask, render_template, request, session, url_for, redirect
 import os
 app=Flask(__name__)
-app.sceret_key=os.urandom(32)
+app.secret_key=os.urandom(32)
 # session["username"] = "perry"
 # session["password"] = "thePlatypus"
 
@@ -19,14 +19,27 @@ def disp_login():
 
 @app.route('/logout')
 def logout():
-    session.pop()
-    return redirect(url_for('/'))
+    session.pop('username')
+    return redirect(url_for('disp_login'))
 
 @app.route('/auth', methods=["POST"])
 def authenticate():
-    print (url_for("disp_login")) # Should print out "/"
-    print (url_for("authenticate")) # Should print out "/auth"
-    
+    # print (url_for("disp_login")) # Should print out "/"
+    # print (url_for("authenticate")) # Should print out "/auth"
+    username=request.form['username']
+    password=request.form['password']
+    if username == "perry":
+        if password == "thePlatypus":
+            session["username"] = "perry"
+            return redirect(url_for('disp_login'))
+        return render_template("home.html", incPass="Incorrect Password")
+    return render_template("home.html", incUser="Incorrect Username")
+
+
+
+
+
+
 
     #return redirect(url_for("disp_login")) # Redirects user to the url that is tied to the function "disp_login"
     # return render_template('auth.html',
