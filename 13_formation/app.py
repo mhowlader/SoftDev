@@ -14,11 +14,10 @@ def home():
 
 @app.route('/auth')
 def authorize():
-    username=request.args['username']
-    meth = request.method
-    return render_template('auth.html',
-                            user=username
-                            )
+    username=request.form['username']
+    password=request.form['password']
+
+    
 
 if __name__ == "__main__":
     app.debug = True
