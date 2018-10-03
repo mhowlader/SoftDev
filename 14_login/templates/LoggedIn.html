@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
+    {% extends "base.html" %}
     <body>
+        {% block content %}
         <h2>You are now logged in as {{user}}</h2>
         <br>
         Click <a href="/logout"> this </a> to logout.
+        {% endblock %}
     </body>
 </html>
