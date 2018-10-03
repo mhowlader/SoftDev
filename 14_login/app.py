@@ -7,8 +7,7 @@ from flask import Flask, render_template, request, session, url_for, redirect, f
 import os
 app=Flask(__name__)
 app.secret_key=os.urandom(32)# 32 bits of random data as a string
-# session["username"] = "perry"
-# session["password"] = "thePlatypus"
+
 
 @app.route('/')
 def disp_login():
@@ -17,6 +16,7 @@ def disp_login():
         return render_template('LoggedIn.html', user = username)  #inputs are in this this file, which will be sent to auth
     return render_template("home.html")
 
+
 @app.route('/logout')
 def logout():
     session.pop('username') #ends session
@@ -24,31 +24,20 @@ def logout():
 
 @app.route('/auth', methods=["POST"])
 def authenticate():
-    # print (url_for("disp_login")) # Should print out "/"
-    # print (url_for("authenticate")) # Should print out "/auth"
-    # flash("Wrongg")
-    # return redirect(url_for('disp_login'))
-
-
-    invalid=None
+    invalid=None #variable for invalid flash message
     username=request.form['username'] #gets username from form
     password=request.form['password'] #gets password from form
     if username == "perry": #checks if username is correct
         if password == "thePlatypus": #checks if password is correct
             session["username"] = "perry" # sets the username as perry in session
             return redirect(url_for('disp_login')) #calls disp_login, which now sees that you logged in and renders the logged in template
-        invalid = "Incorrect Password"    #returns to home to login again if incorrect password
+        invalid = "Incorrect Password"   #sets the flash message invalud to this
     else:
-        invalid = "Incorrect Username"
+        invalid = "Incorrect Username" #sets the flash message invalid to this
     flash(invalid)
     flash("Try Again")
     return redirect(url_for('disp_login'))
 
-
-    #return redirect(url_for("disp_login")) # Redirects user to the url that is tied to the function "disp_login"
-    # return render_template('auth.html',
-    #                         user=username
-    #                         )
 
 if __name__ == "__main__":
     app.debug = True
