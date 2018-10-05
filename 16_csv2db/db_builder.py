@@ -17,22 +17,27 @@ c = db.cursor()               #facilitate db ops
 #INSERT YOUR POPULATE CODE IN THIS ZONE
 
 with open('courses.csv', newline='') as coursefile:
-     courseRead = csv.DictReader(coursefile)
+     courseDict = csv.DictReader(coursefile)
 
 with open('peeps.csv', newline='') as peepsfile:
-    peepsRead = csv.DictReader(peepsfile)
+    peepsDict = csv.DictReader(peepsfile)
+    createPeeps = "CREATE TABLE peeps(name TEXT, age INTEGER, id INTEGER)"         #build SQL stmt, save as string
+    c.execute(createPeeps)   #run SQL statement
+    for row in peepsDict:
+        c.execute(f'''INSERT INTO peeps (name, age, id) VALUES({row['name']},{ int(row['age'])},{int(row['id'])})''')
+        #c.execute("INSERT INTO peeps (name, age, id) VALUES ('hello', 5, 6)")
 
 
-    
+# createPeeps = "CREATE TABLE IF NOT EXISTS peeps(name TEXT, age INTEGER, id INTEGER)"         #build SQL stmt, save as string
+# c.execute(createPeeps)   #run SQL statement
+# for key, value in peepsDict.items():
+#     for obj in value:
+#         c.execute(f'INSERT INTO peeps VALUES({key}, {obj}')
 
-     
 
 
-command = "CREATE TABLE roster(name TEXT, userid INTEGER)"+"INSERT INTO roster VALUES('drums',0)"         #build SQL stmt, save as string
-c.execute(command)   #run SQL statement
+
 #==========================================================
 
 db.commit() #save changes
 db.close()  #close database
-
-
