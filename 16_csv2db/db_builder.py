@@ -17,7 +17,12 @@ c = db.cursor()               #facilitate db ops
 #INSERT YOUR POPULATE CODE IN THIS ZONE
 
 with open('courses.csv', newline='') as coursefile:
-     courseDict = csv.DictReader(coursefile)
+     coursesDict = csv.DictReader(coursefile)
+     createCourses = "CREATE TABLE courses(code TEXT, mark INTEGER, id INTEGER)"         #build SQL stmt, save as string
+     c.execute(createCourses)   #run SQL statement
+     for row in coursesDict:
+         c.execute(f'''INSERT INTO courses (code, mark, id) VALUES("{row['code']}","{ int(row['mark'])}","{int(row['id'])}")''')
+
 
 with open('peeps.csv', newline='') as peepsfile:
     peepsDict = csv.DictReader(peepsfile)
