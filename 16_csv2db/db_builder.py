@@ -21,10 +21,10 @@ with open('courses.csv', newline='') as coursefile:
 
 with open('peeps.csv', newline='') as peepsfile:
     peepsDict = csv.DictReader(peepsfile)
-    createPeeps = "CREATE TABLE peeps(name TEXT, age INTEGER, id INTEGER)"         #build SQL stmt, save as string
+    createPeeps = "CREATE TABLE peeps(name TEXT, age INTEGER, id INTEGER PRIMARY KEY)"         #build SQL stmt, save as string
     c.execute(createPeeps)   #run SQL statement
     for row in peepsDict:
-        c.execute(f'''INSERT INTO peeps (name, age, id) VALUES({row['name']},{ int(row['age'])},{int(row['id'])})''')
+        c.execute(f'''INSERT INTO peeps (name, age, id) VALUES("{row['name']}","{ int(row['age'])}","{int(row['id'])}")''')
         #c.execute("INSERT INTO peeps (name, age, id) VALUES ('hello', 5, 6)")
 
 
