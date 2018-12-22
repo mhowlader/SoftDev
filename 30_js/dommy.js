@@ -1,5 +1,7 @@
-// Lo, what is this? Could it be a VALUE-ADDED-KEY2SUCCESS?!?!
-
+// team Whirlpool -- Mohtasim Howlader, Soojin Choi
+// SoftDev pd7
+// K30 -- sequential regression III: Season of the Witch
+// 2018-12-21
 var changeHeading = function(e) {
     var h = document.getElementById("h")
     //console.log(ele);
@@ -42,10 +44,10 @@ var fib = function(n) {
 };
 
 var addFib = function(e){
-    console.log(e);
- ???
- ...
- ???
+    var list = document.getElementById("thelist");
+    var item = document.createElement("li");
+    item.innerHTML= fib(5);
+    list.appendChild(item);
 };
 
 // var addFib2 = function(e){
